@@ -1,6 +1,6 @@
 h3 {
 	display: grid;
-	grid-template-columns: 1fr 8rem 8rem 1fr;
+	grid-template-columns: 1fr 10rem 10rem 1fr;
 	align-items: center;
 
 }

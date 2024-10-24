@@ -3,7 +3,7 @@
 
 # # Scrape Vb Google Scholar
 
-# In[12]:
+# In[10]:
 
 
 import __main__ as main
@@ -18,14 +18,14 @@ if not hasattr(main, '__file__'):
     sp.run(f"jupyter nbconvert --to script '{notebook_name}.ipynb'; chmod u+x {notebook_name}.py", shell=True)
 
 
-# In[8]:
+# In[2]:
 
 
 vineet_google_scholar = 'https://scholar.google.com/citations?hl=en&user=zr2I_WMAAAAJ&view_op=list_works&sortby=pubdate'
 sp.run(f"cd publications; wget '{vineet_google_scholar}' -O gscholar_hits.html", shell=True)
 
 
-# In[9]:
+# In[3]:
 
 
 with open("publications/gscholar_hits.html", 'rb') as infile:
@@ -33,7 +33,7 @@ with open("publications/gscholar_hits.html", 'rb') as infile:
 hits = hits.decode('unicode-escape')
 
 
-# In[19]:
+# In[4]:
 
 
 publications = re.findall("(?=<td class=\"gsc_a_t\">).*?(?=</span>)", hits)
@@ -43,31 +43,31 @@ years = [re.search('20[0-9][0-9]', x).group(0) for x in publications]
 citation_links = ['https://scholar.google.com/citations?view_op=view_citation&' + re.search('(?=citation_for_view).*?(?=" )', x).group(0) for x in publications]
 
 
-# In[42]:
+# In[5]:
 
 
-authors = []
-dates = []
-journals = []
-links = []
-for citation_link in tqdm(citation_links):
-    sp.run(f"wget '{citation_link}' -O tmp.html", shell=True)
-    with open("tmp.html", 'rb') as infile:
-        lines = infile.read().decode('unicode-escape')
-        author_list, date, journal, *_ = re.findall('(?<=gsc_oci_value">).*?(?=</div>)', lines)
-        if '"' in journal:
-            journal = ''
-        link = re.search('(?<=class="gsc_oci_title_link" href=").*?(?=")', lines).group(0)
-        authors.append(BeautifulSoup(author_list).text)
-        dates.append(BeautifulSoup(date).text)
-        journals.append(journal)
-        links.append(link)
+# authors = []
+# dates = []
+# journals = []
+# links = []
+# for citation_link in tqdm(citation_links):
+#     sp.run(f"wget '{citation_link}' -O tmp.html", shell=True)
+#     with open("tmp.html", 'rb') as infile:
+#         lines = infile.read().decode('unicode-escape')
+#         author_list, date, journal, *_ = re.findall('(?<=gsc_oci_value">).*?(?=</div>)', lines)
+#         if '"' in journal:
+#             journal = ''
+#         link = re.search('(?<=class="gsc_oci_title_link" href=").*?(?=")', lines).group(0)
+#         authors.append(BeautifulSoup(author_list).text)
+#         dates.append(BeautifulSoup(date).text)
+#         journals.append(journal)
+#         links.append(link)
         
-    time.sleep(5)
-    sp.run("rm tmp.html", shell=True)
+#     time.sleep(5)
+#     sp.run("rm tmp.html", shell=True)
 
 
-# In[43]:
+# In[6]:
 
 
 title_length_limit = 75

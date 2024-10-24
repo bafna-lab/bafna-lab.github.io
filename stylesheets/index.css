@@ -1,0 +1,58 @@
+.index {
+	margin-left: 3rem;
+}
+
+.profile_picture {
+	display: flex;
+	justify-content: center;
+}
+
+.name {
+	text-align: center;
+	width: 100%;
+}
+
+
+.about_container {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 50rem 1fr;
+}
+.about {
+	text-align: center;
+}
+
+body {
+	font-family: Monospace;
+	font-size: 1rem;
+}
+
+li {
+	margin-bottom: 3rem;
+}
+
+.link {
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+}
+
+.date {
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+}
+
+.date span {
+	margin-left: 1rem;
+	font-size: 1.15rem;
+}
+
+.date img {
+	width: 1.75rem;
+	height: 1.75rem;
+	margin-left: 12rem;
+}
+
+ul{
+  list-style-type: square;
+ }

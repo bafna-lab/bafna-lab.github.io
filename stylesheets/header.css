@@ -1,0 +1,16 @@
+h3 {
+	display: grid;
+	grid-template-columns: 1fr 8rem 8rem 1fr;
+	align-items: center;
+
+}
+
+a {
+	text-align: center;
+	text-decoration: none;
+	color: black;
+}
+
+.title {
+	text-align: center;
+}

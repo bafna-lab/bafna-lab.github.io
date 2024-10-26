@@ -3,7 +3,7 @@
 
 # # Scrape Vb Google Scholar
 
-# In[1]:
+# In[46]:
 
 
 import __main__ as main
@@ -11,11 +11,9 @@ import subprocess as sp
 import time
 from bs4 import BeautifulSoup
 from tqdm import tqdm
+import os
 import re
 notebook_name = 'scrape_vb_google_scholar'
-
-if not hasattr(main, '__file__'):
-    sp.run(f"jupyter nbconvert --to script '{notebook_name}.ipynb'; chmod u+x {notebook_name}.py", shell=True)
 
 
 # In[2]:
@@ -110,10 +108,12 @@ with open('index.html', 'w') as outfile:
     outfile.write(lines[:start_papers] + paper_list + lines[end_papers:])
 
 
-# In[ ]:
+# In[45]:
 
 
 sp.run(f"cd '{os.getcwd()}'; git add .; git commit -m 'Automated Website Update'; git push origin main", shell=True)
+if not hasattr(main, '__file__'):
+    sp.run(f"jupyter nbconvert --to script '{notebook_name}.ipynb'; chmod u+x {notebook_name}.py", shell=True)
 
 
 # In[ ]:

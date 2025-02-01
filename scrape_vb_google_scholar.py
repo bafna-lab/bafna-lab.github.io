@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/home/giprasad/anaconda3/bin/python3
 # coding: utf-8
 
 # # Scrape Vb Google Scholar
@@ -108,12 +108,16 @@ with open('index.html', 'w') as outfile:
     outfile.write(lines[:start_papers] + paper_list + lines[end_papers:])
 
 
-# In[11]:
+# In[ ]:
 
 
 sp.run(f"cd '{os.getcwd()}'; git add .; git commit -m 'Automated Website Update'; git push origin main", shell=True)
 if not hasattr(main, '__file__'):
     sp.run(f"jupyter nbconvert --to script '{notebook_name}.ipynb'; chmod u+x {notebook_name}.py", shell=True)
+    with open(f"{notebook_name}.py") as infile:
+        lines = infile.readlines()
+    with open(f"{notebook_name}.py", 'w') as outfile:
+        outfile.write('#!/home/giprasad/anaconda3/bin/python3\n' + ''.join(lines[1:]))
 
 
 # In[ ]:

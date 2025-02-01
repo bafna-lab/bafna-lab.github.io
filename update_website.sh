@@ -1,5 +1,5 @@
-#!/bin/zsh
+#!/bin/bash
 
-source ~/.zprofile
-cd /Users/ginoprasad/bafna_lab/bafna-lab.github.io
-python3 /Users/ginoprasad/bafna_lab/bafna-lab.github.io/scrape_vb_google_scholar.py
+source ~/.profile
+cd $HOME/bafna_lab/bafna-lab.github.io
+python3 $HOME/bafna_lab/bafna-lab.github.io/scrape_vb_google_scholar.py

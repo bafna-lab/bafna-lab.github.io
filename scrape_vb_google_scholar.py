@@ -3,7 +3,7 @@
 
 # # Scrape Vb Google Scholar
 
-# In[46]:
+# In[1]:
 
 
 import __main__ as main
@@ -23,7 +23,7 @@ vineet_google_scholar = 'https://scholar.google.com/citations?hl=en&user=zr2I_WM
 sp.run(f"cd publications; wget '{vineet_google_scholar}' -O gscholar_hits.html", shell=True)
 
 
-# In[3]:
+# In[4]:
 
 
 with open("publications/gscholar_hits.html", 'rb') as infile:
@@ -31,7 +31,7 @@ with open("publications/gscholar_hits.html", 'rb') as infile:
 hits = hits.decode('unicode-escape')
 
 
-# In[4]:
+# In[5]:
 
 
 publications = re.findall("(?=<td class=\"gsc_a_t\">).*?(?=</span>)", hits)
@@ -41,7 +41,7 @@ years = [re.search('20[0-9][0-9]', x).group(0) for x in publications]
 citation_links = ['https://scholar.google.com/citations?view_op=view_citation&' + re.search('(?=citation_for_view).*?(?=" )', x).group(0) for x in publications]
 
 
-# In[8]:
+# In[6]:
 
 
 authors = []
@@ -65,20 +65,20 @@ for citation_link in tqdm(citation_links):
     sp.run("rm tmp.html", shell=True)
 
 
-# In[9]:
+# In[7]:
 
 
 title_length_limit = 75
 abbreviated_titles = [title if len(title) < title_length_limit else title[:title_length_limit-3]+'...' for title in titles]
 
 
-# In[34]:
+# In[8]:
 
 
 vineet_led = [x.endswith('Bafna') and not x.startswith('Joseph Califano') for x in authors]
 
 
-# In[41]:
+# In[9]:
 
 
 paper_list = []
@@ -96,7 +96,7 @@ for title, author_list, link, journal, year, bafna_project in zip(abbreviated_ti
 paper_list = '\n'.join(paper_list)
 
 
-# In[42]:
+# In[10]:
 
 
 with open('index.html') as infile:
@@ -108,7 +108,7 @@ with open('index.html', 'w') as outfile:
     outfile.write(lines[:start_papers] + paper_list + lines[end_papers:])
 
 
-# In[45]:
+# In[11]:
 
 
 sp.run(f"cd '{os.getcwd()}'; git add .; git commit -m 'Automated Website Update'; git push origin main", shell=True)
